@@ -63,3 +63,4 @@ macOS Mojave version 10.14.2
 
 ## Additional Notes
 * Had to apply USBInjectAll.kext for the bluetooth port to be discovered; then disabled it due to something strange with the video card when looking at IORegistryExplorer. I may need to create a custom dsdt, but I don't know how to yet.
+* Updating the Product Model/Name from 14,2 to 18,3 required Graphics > Inject ATI. Otherwise, it would boot but not display on local monitor (was able to remote in via Share Screen)
