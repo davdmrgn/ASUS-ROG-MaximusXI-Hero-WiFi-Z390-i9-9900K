@@ -13,25 +13,29 @@ Type|Item
 **Power Supply** | [EVGA - SuperNOVA G3 550 W 80+ Gold Certified Fully-Modular ATX Power Supply](https://pcpartpicker.com/product/sMM323/evga-supernova-g3-550w-80-gold-certified-fully-modular-atx-power-supply-220-g3-0550)
 **Monitor** | [LG - 38WK95C-W 37.5" 3840x1600 60 Hz Monitor](https://pcpartpicker.com/product/XLqhP6/lg-38wk95c-w-375-3840x1600-60hz-monitor-38wk95c-w)
 
+### Hardware Info
+#### CPU Cooler + RAM Height + Fan Location
+The RAM height caused the NH-D15 fan to not fit in the case when exhausting air toward the rear of the case. The included NZXT 3-pin fan at the top had to be moved to the front of the case as an intake. The NH-D15 was then rotated to exhaust air through the top. The fans clips were changed to support this from their original locations to make sure the fans would fit with the graphics card in the fist PCI x16 slot. 
+
+#### NZXT Fans
+H500 includes (2) 120mm fans. One is 4-pin and the other is 3-pin. The 4-pin fan runs at a high RPM when in PWM mode. Both NZXT fans run at a lower RPM when calibrated in DC mode from the ASUS BIOS.
+
 ## macOS
 macOS Mojave version 10.14.2
 
 * Format USB (minimum 8 GB)
 * Use Unibeast to create USB installer using the instructions here: https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/
 
-> Now that I have a config that works, it may be possible to create a normal USB installer using `createinstallmedia`, install Clover to that USB, then copy over any additional kexts and drivers, then copy over the config.plist instead of using Unibeast. _Must test this_
+> Now that we have a config that works, it is possible to create a normal USB installer using `createinstallmedia`, install Clover to that USB, then replace the EFI folder on the USB installer with the one here on Github. The boot takes longer, but it works.
 
 ## BIOS Settings
 * Load optimized defaults
 * Auto-configure fans
-* Disable Vt-d
-
-### Post-Installation
 * Enable Vt-d and Intel (VMX) Virtualization Technology (for VMware Fusion)
 
 ## Working
 * Mojave install boots successfully
-* NVME - Samsung 970 EVO 2TB
+* NVME - Samsung 970 EVO 2TB (~2.5 GB/s WRITE, ~3.1 GB/s READ via BlackMagic Disk Speed Test)
 * Radeon RX 580 Displayport output
 * Wired Ethernet - Intel I219V7 PCI Express Gigabit Ethernet
 * USB 2.0
@@ -40,14 +44,14 @@ macOS Mojave version 10.14.2
 * SATA ports detected, not tested
 * S1220 Audio (ALC1220) https://hackintosher.com/guides/get-hackintosh-audio-working/
 * Youtube video
+* H.264 videos via VLC (.mkv, .m4a, .m4p)
+* HWMonitor (after copying required kexts to EFI)
 
 ## Not Working
-* ????
+* Charging Macbook via USB-C (It's recognized, but get an error regarding Firewire not being supported on this Mac - 14,2 currently)
 
 ## Not Confirmed
 * USB-C
-* USB-A 10 Gbps speed
-* Video
 
 ## Resources
 * Clover https://sourceforge.net/projects/cloverefiboot/
