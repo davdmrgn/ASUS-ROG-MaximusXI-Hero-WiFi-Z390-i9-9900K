@@ -34,6 +34,7 @@ macOS Mojave version 10.14.2
 * Load optimized defaults
 * Auto-configure fans
 * Enable Vt-d and Intel (VMX) Virtualization Technology (for VMware Fusion)
+* Disabled unused Bluetooth port 3.1-2 (there's a header on the motherboard I'm not using)
 
 ## Working
 * Mojave install boots successfully
@@ -49,13 +50,11 @@ macOS Mojave version 10.14.2
 * H.264 videos via VLC (.mkv, .m4a, .m4p)
 * HWMonitor (after copying required kexts to EFI)
 * Wi-Fi
+* Bluetooth
+* USB-C connect to display - working as a USB hub for additional USB type A ports on display (not confirmed as a display+sound source)
 
 ## Not Working
 * Charging Macbook via USB-C (It's recognized, but get an error regarding Firewire not being supported on this Mac - 14,2 currently)
-* Bluetooth
-
-## Not Confirmed
-* USB-C
 
 ## Resources
 * Clover https://sourceforge.net/projects/cloverefiboot/
