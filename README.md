@@ -12,6 +12,8 @@ Type|Item
 **Case** | [NZXT - H500 (Black) ATX Mid Tower Case](https://pcpartpicker.com/product/p8x2FT/nzxt-h500-black-atx-mid-tower-case-ca-h500b-b1)
 **Power Supply** | [EVGA - SuperNOVA G3 550 W 80+ Gold Certified Fully-Modular ATX Power Supply](https://pcpartpicker.com/product/sMM323/evga-supernova-g3-550w-80-gold-certified-fully-modular-atx-power-supply-220-g3-0550)
 **Monitor** | [LG - 38WK95C-W 37.5" 3840x1600 60 Hz Monitor](https://pcpartpicker.com/product/XLqhP6/lg-38wk95c-w-375-3840x1600-60hz-monitor-38wk95c-w)
+**Wi-Fi + Bluetooth Adapter PCI-E x1 Card** | [WiFi + Bluetooth 4.0 Card to PCI-E x1 Adapter Card PC/Hackintosh Without BCM943224PCIEBT2/bcm94360CS2/BCM943602CS (black)](https://www.amazon.com/gp/product/B076KBBFV4/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
+**Wi-Fi Bluetooth Airport Wireless Card** | [Padarsey BCM94360CS2 WiFi Bluetooth Airport Wireless Card Compatible for MacBook Air 11" A1465 (2013, 2014, 2015) 13" A1466 (2013, 2014, 2015, 2017) (661-7465, 661-7481, 653-0023)](https://www.amazon.com/gp/product/B07C78VBCD/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 
 ### Hardware Info
 #### CPU Cooler + RAM Height + Fan Location
@@ -46,9 +48,11 @@ macOS Mojave version 10.14.2
 * Youtube video
 * H.264 videos via VLC (.mkv, .m4a, .m4p)
 * HWMonitor (after copying required kexts to EFI)
+* Wi-Fi
 
 ## Not Working
 * Charging Macbook via USB-C (It's recognized, but get an error regarding Firewire not being supported on this Mac - 14,2 currently)
+* Bluetooth
 
 ## Not Confirmed
 * USB-C
