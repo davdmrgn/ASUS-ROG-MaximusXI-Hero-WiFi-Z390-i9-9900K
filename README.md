@@ -60,3 +60,6 @@ macOS Mojave version 10.14.2
 * Clover https://sourceforge.net/projects/cloverefiboot/
 * Clover Configurator https://mackie100projects.altervista.org/download-clover-configurator/
 * https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/ This guide got the installer working straight away. I know the board doesn't match, but it works.
+
+## Additional Notes
+* Had to apply USBInjectAll.kext for the bluetooth port to be discovered; then disabled it due to something strange with the video card when looking at IORegistryExplorer. I may need to create a custom dsdt, but I don't know how to yet.
