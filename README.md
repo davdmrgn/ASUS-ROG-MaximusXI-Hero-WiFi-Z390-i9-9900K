@@ -16,6 +16,11 @@ Type|Item
 ## macOS
 macOS Mojave version 10.14.2
 
+* Format USB (minimum 8 GB)
+* Use Unibeast to create USB installer using the instructions here: https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/
+
+> Now that I have a config that works, it may be possible to create a normal USB installer using `createinstallmedia`, install Clover to that USB, then copy over any additional kexts and drivers, then copy over the config.plist instead of using Unibeast. _Must test this_
+
 ## BIOS Settings
 * Load optimized defaults
 * Auto-configure fans
@@ -30,11 +35,22 @@ macOS Mojave version 10.14.2
 * Sleep/Wake
 * Quicklook
 * SATA ports detected, not tested
+* S1220 Audio (ALC1220) https://hackintosher.com/guides/get-hackintosh-audio-working/
+* Youtube video
 
 ## Not Working
-* Audio
+* ????
 
 ## Not Confirmed
 * USB-C
 * USB-A 10 Gbps speed
 * Video
+
+## Resources
+* Clover https://sourceforge.net/projects/cloverefiboot/
+* Clover Configurator https://mackie100projects.altervista.org/download-clover-configurator/
+* https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/ This guide got the installer working straight away. I know the board doesn't match, but it works.
+* 
+
+
+
