@@ -57,9 +57,13 @@ macOS Mojave version 10.14.2
 * Charging Macbook via USB-C (It's recognized, but get an error regarding Firewire not being supported on this Mac - 14,2 currently)
 
 ## Resources
-* Clover https://sourceforge.net/projects/cloverefiboot/
-* Clover Configurator https://mackie100projects.altervista.org/download-clover-configurator/
-* https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/ This guide got the installer working straight away. I know the board doesn't match, but it works.
+* [Clover](https://sourceforge.net/projects/cloverefiboot/)
+* [Clover Configurator](https://mackie100projects.altervista.org/download-clover-configurator/)
+* [This guide](https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/)  got the installer working straight away. I know the board doesn't match, but it worked.
+* [Hardware sensors and fan speed](https://hackintosher.com/guides/hwmonitor-hackintosh-guide/)
+    * [RehabMan's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/)
+* [Guide to Fresh Installing Mojave](https://hackintosher.com/guides/guide-to-fresh-installing-macos-mojave-on-a-hackintosh-10-14/)
+* [Mojave Update](https://hackintosher.com/guides/updating-your-hackintosh-to-mojave-10-14)
 
 ## Additional Notes
 * Had to apply USBInjectAll.kext for the bluetooth port to be discovered; then disabled it due to something strange with the video card when looking at IORegistryExplorer. I may need to create a custom dsdt, but I don't know how to yet.
