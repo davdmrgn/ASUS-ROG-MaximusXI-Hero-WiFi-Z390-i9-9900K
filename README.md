@@ -28,17 +28,17 @@ macOS Mojave version 10.14.2
 * Format USB (minimum 8 GB) `diskutil eraseDisk JHFS+ USB /dev/disk#`
 > The above command was required for a USB drive which did not have an EFI partition, not created with the GUID partition scheme. The option to create the GUID partition scheme was not in the Mojave Disk Utility GUI.
 
-* Use Unibeast to create USB installer using the instructions here: https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/
-
+* Create a macOS USB installer `sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB`
+* 
 > Now that we have a config that works, it is possible to create a normal USB installer using `createinstallmedia`, install Clover to that USB, then replace the EFI folder on the USB installer with the one here on Github. The boot takes longer, but it works.
-
-* `sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB`
 
 ## BIOS Settings
 * Load optimized defaults
-* Auto-configure fans
-* Enable Vt-d and Intel (VMX) Virtualization Technology (for VMware Fusion)
-* Disabled unused Bluetooth port 3.1-2 (there's a header on the motherboard I'm not using)
+* Optimize fans
+* Manually configure fan curves
+* Enable Vt-d (for VMware Fusion)
+* Enable Intel (VMX) Virtualization Technology (for VMware Fusion)
+* XHCI Hand-off: Enabled
 
 ## Working
 * Mojave install boots successfully
