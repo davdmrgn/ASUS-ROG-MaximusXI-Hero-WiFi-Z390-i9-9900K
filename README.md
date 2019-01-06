@@ -85,19 +85,19 @@ macOS Mojave version 10.14.2
     * HS03: USB 3.1 Gen 2 rear - ENABLED
     * HS04: USB 3.1 Gen 2 rear - ENABLED
     * HS05: USB 3.1 Gen 2 rear - ENABLED
-    * HS06: USB-C 3.1 rear - High Speed USB DISABLED
+    * HS06: USB-C 3.1 rear - ENABLED
     * HS07: USB 3.1 Gen 1 rear - ENABLED
     * HS08: USB 3.1 Gen 1 rear - ENABLED
     * HS09: USB 3.1 Gen 1 front - ENABLED
     * HS10: USB 3.1 Gen 1 front - ENABLED
-    * HS11: USB 2.0 rear - ENABLED
+    * HS11: USB 2.0 rear - DISABLED
     * HS12: USB 2.0 rear (BIOS Flashback) - DISABLED
     * HS13: USB 2.0 connector USB_E12 - ENABLED (Used for Broadcom bluetooth PCI adapter)
     * HS14: USB 2.0 connector USB_E34 - DISABLED
     * SS03: ENABLED
     * SS04: ENABLED
     * SS05: ENABLED
-    * SS06: USB-C 3.1 rear - High Speed USB ENABLED (The USB-C port works without HS being enabled, except at login screen)
+    * SS06: USB-C 3.1 rear - High Speed USB ENABLED
     * SS09: ENABLED
     * SS10: ENABLED
     * Other Super Speed (SS) USB ports are DISABLED 
