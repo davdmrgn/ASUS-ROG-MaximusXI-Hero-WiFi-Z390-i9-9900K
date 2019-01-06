@@ -64,3 +64,32 @@ macOS Mojave version 10.14.2
 ## Additional Notes
 * Had to apply USBInjectAll.kext for the bluetooth port to be discovered; then disabled it due to something strange with the video card when looking at IORegistryExplorer. I may need to create a custom dsdt, but I don't know how to yet.
 * Updating the Product Model/Name from 14,2 to 18,3 required Graphics > Inject ATI. Otherwise, it would boot but not display on local monitor (was able to remote in via Share Screen)
+
+## SSDT (USB)
+* WORK IN PROGRESS
+* Open About This Mac > System Report > Hardware > USB
+* Take note of the USB 3.1 Bus PCI Device ID (0xa36d)
+* Open SSDT-UIAC-ALL.dsl in MaciASL
+* Find the section which matches the above PCI Device ID, and remove all other sections
+* The current SSDT-UIAC file is configured as follows:
+    * HS01: Asus Aura Lighting - DISABLED
+    * HS02: USB 3.1 Gen 2 front panel connector (U31G2_2) - DISABLED
+    * HS03: USB 3.1 Gen 2 rear - ENABLED
+    * HS04: USB 3.1 Gen 2 rear - ENABLED
+    * HS05: USB 3.1 Gen 2 rear - ENABLED
+    * HS06: USB-C 3.1 rear - High Speed USB DISABLED
+    * HS07: USB 3.1 Gen 1 rear - ENABLED
+    * HS08: USB 3.1 Gen 1 rear - ENABLED
+    * HS09: USB 3.1 Gen 1 front - ENABLED
+    * HS10: USB 3.1 Gen 1 front - ENABLED
+    * HS11: USB 2.0 rear - ENABLED
+    * HS12: USB 2.0 rear (BIOS Flashback) - DISABLED
+    * HS13: USB 2.0 connector USB_E12 - ENABLED (Used for Broadcom bluetooth PCI adapter)
+    * HS14: USB 2.0 connector USB_E34 - DISABLED
+    * SS03: ENABLED
+    * SS04: ENABLED
+    * SS05: ENABLED
+    * SS06: USB-C 3.1 rear - High Speed USB ENABLED (The USB-C port works without HS being enabled, except at login screen)
+    * SS09: ENABLED
+    * SS10: ENABLED
+    * Other Super Speed (SS) USB ports are DISABLED 
