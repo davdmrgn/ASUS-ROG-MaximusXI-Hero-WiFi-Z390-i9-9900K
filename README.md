@@ -17,20 +17,25 @@ Type|Item
 
 ### Hardware Info
 #### CPU Cooler + RAM Height + Fan Location
-The RAM height caused the NH-D15 fan to not fit in the case when exhausting air toward the rear of the case. The included NZXT 3-pin fan at the top had to be moved to the front of the case as an intake. The NH-D15 was then rotated to exhaust air through the top. The fans clips were changed to support this from their original locations to make sure the fans would fit with the graphics card in the fist PCI x16 slot. 
+The RAM height caused the NH-D15 fan to not fit in the case when exhausting air toward the rear of the case. The included NZXT 3-pin fan at the top had to be moved to the front of the case as an intake. The NH-D15 was rotated to exhaust air through the top of the case. The fans clips were changed to support this from their original locations to make sure the fans would fit with the graphics card in the fist PCI x16 slot. 
 
 #### NZXT Fans
 H500 includes (2) 120mm fans. One is 4-pin and the other is 3-pin. The 4-pin fan runs at a high RPM when in PWM mode. Both NZXT fans run at a lower RPM when calibrated in DC mode from the ASUS BIOS.
 
+#### H500 USB
+Front panel USB uses 3.0 Gen1 instead of 3.0 Gen2.
+
+#### WiFi Adapter Card
+PCI card has 3 antennas. The BT/WiFi card only has 2 antenna connections due to its small size (for laptops). Works fine, but a desktop-style card with 3 antenna connections (iMac) could have been used.
+
 ## macOS
 macOS Mojave version 10.14.2
-
 * Format USB (minimum 8 GB) `diskutil eraseDisk JHFS+ USB /dev/disk#`
 > The above command was required for a USB drive which did not have an EFI partition, not created with the GUID partition scheme. The option to create the GUID partition scheme was not in the Mojave Disk Utility GUI.
 
 * Create a macOS USB installer `sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB`
-* 
-> Now that we have a config that works, it is possible to create a normal USB installer using `createinstallmedia`, install Clover to that USB, then replace the EFI folder on the USB installer with the one here on Github. The boot takes longer, but it works.
+* Install Clover to USB installer
+* Run Clover Configurator to create/update EFI partition, or copy EFI folder here to the EFI partition
 
 ## BIOS Settings
 * Load optimized defaults
@@ -70,11 +75,11 @@ macOS Mojave version 10.14.2
 * [Mojave Update](https://hackintosher.com/guides/updating-your-hackintosh-to-mojave-10-14)
 
 ## Additional Notes
-* Had to apply USBInjectAll.kext for the bluetooth port to be discovered; then disabled it due to something strange with the video card when looking at IORegistryExplorer. I may need to create a custom dsdt, but I don't know how to yet.
 * Updating the Product Model/Name from 14,2 to 18,3 required Graphics > Inject ATI. Otherwise, it would boot but not display on local monitor (was able to remote in via Share Screen)
 
 ## SSDT (USB)
-* WORK IN PROGRESS
+In this configuration, the 2 rear black USB ports, USB 3.0 Gen2 motherboard header, and one of the USB 2.0 headers are not enabled in order to stay within macOS's 15-port limit.
+* Make sure `USBInjectAll.kext` and USB port limit patch is applied is applied
 * Open About This Mac > System Report > Hardware > USB
 * Take note of the USB 3.1 Bus PCI Device ID (0xa36d)
 * Open SSDT-UIAC-ALL.dsl in MaciASL
@@ -101,3 +106,19 @@ macOS Mojave version 10.14.2
     * SS09: ENABLED
     * SS10: ENABLED
     * Other Super Speed (SS) USB ports are DISABLED 
+* Save as `SSDT-UIAC-ALL.aml` file to `EFI/CLOVER/ACPI/patched/`
+* Disable USB port limit patch
+
+## Clover Files
+Kext | Usage
+--- | ---
+AppleALC.kext | Audio
+FakeSMC.kext | Required
+FakeSMC_ACPISensors.kext | HWMonitor
+FakeSMC_CPUSensors.kext | HWMonitor
+FakeSMC_GPUSensors.kext | HWMonitor
+FakeSMC_LPCSensors.kext | HWMonitor
+FakeSMC_SMMSensors.kext | HWMonitor
+IntelMausiEthernet.kext | Ethernet
+Lilu.kext | Audio
+USBInjectAll.kext | USB
