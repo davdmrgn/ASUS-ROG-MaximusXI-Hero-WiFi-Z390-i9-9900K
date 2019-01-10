@@ -44,6 +44,9 @@ macOS Mojave version 10.14.2
 * Enable Vt-d (for VMware Fusion)
 * Enable Intel (VMX) Virtualization Technology (for VMware Fusion)
 * XHCI Hand-off: Enabled
+* Advanced\System Agent (SA) Configuration\Graphics Configuration
+    * Primary Display: PCIE
+    * iGPU Multi-Monitor: Enabled (required for JPEG preview/quick look)
 
 ## Working
 * Mojave install boots successfully
@@ -120,5 +123,6 @@ FakeSMC_GPUSensors.kext | HWMonitor
 FakeSMC_LPCSensors.kext | HWMonitor
 FakeSMC_SMMSensors.kext | HWMonitor
 IntelMausiEthernet.kext | Ethernet
-Lilu.kext | Audio
+Lilu.kext | Audio + Graphics
 USBInjectAll.kext | USB
+WhateverGreen.kext | Graphics
