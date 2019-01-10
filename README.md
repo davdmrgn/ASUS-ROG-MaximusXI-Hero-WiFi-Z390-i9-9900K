@@ -78,7 +78,7 @@ macOS Mojave version 10.14.2
 * [Mojave Update](https://hackintosher.com/guides/updating-your-hackintosh-to-mojave-10-14)
 
 ## Additional Notes
-* Updating the Product Model/Name from 14,2 to 18,3 required Graphics > Inject ATI. Otherwise, it would boot but not display on local monitor (was able to remote in via Share Screen)
+* Updating the Product Model/Name from 14,2 to 18,3 required Graphics > Inject ATI. Otherwise, it would boot but not display on local monitor (was able to remote in via Share Screen). Using Lilu.kext and WhateverGreen.kext is a replacement for injecting ATI in Clover.
 
 ## SSDT (USB)
 In this configuration, the 2 rear black USB ports, USB 3.0 Gen2 motherboard header, and one of the USB 2.0 headers are not enabled in order to stay within macOS's 15-port limit.
