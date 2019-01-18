@@ -126,3 +126,8 @@ IntelMausiEthernet.kext | Ethernet
 Lilu.kext | Audio + Graphics
 USBInjectAll.kext | USB
 WhateverGreen.kext | Graphics
+
+## Update System Info CPU
+* https://www.insanelymac.com/forum/topic/323469-change-cpu-name-in-about-this-mac/?do=findComment&comment=2488294
+
+Updated file [./AppleSystemInfo.strings](here)
