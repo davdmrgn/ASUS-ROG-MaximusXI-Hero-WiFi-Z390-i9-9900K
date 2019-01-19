@@ -30,7 +30,7 @@ Front (Intake) | (2) NF-A14 PWM | 140mm | 300-1500 | 24.6 | 115.5
 
 ### Asus Fan Curve Settings
 Fan|Low Temp|Mid Temp|High Temp|Ramp Up|Ramp Down|Source|Auto-Stop
-:----:----:----:----:----:----:----:----
+:----|:----|:----|:----|:----|:----|:----|:----
 CPU (Cooler)|20% @ 40C|60% @ 60C|Not Used|0s|5s|CPU|
 H-AMP Fan (Top)|20% @ 40C|60% @ 60C|Not Used|12s|25s|CPU|Yes
 Cassis Fan 1 (Rear)|20% @ 40C|60% @ 60C|Not Used|12s|25s|CPU|
