@@ -17,10 +17,18 @@ Type|Item
 
 ### Hardware Info
 #### CPU Cooler + RAM Height + Fan Location
-The RAM height caused the NH-D15 fan to not fit in the case when exhausting air toward the rear of the case. The included NZXT 3-pin fan at the top had to be moved to the front of the case as an intake. The NH-D15 was rotated to exhaust air through the top of the case. The fans clips were changed to support this from their original locations to make sure the fans would fit with the graphics card in the fist PCI x16 slot. 
+The RAM height caused the NH-D15 fan to not fit in the case when exhausting air toward the rear of the case. NH-D15 installation is possible when venting through the top of the case (vertical) instead of the rear (horizontal). In this configuration, the video card may need to be positioned in the middle x16 PCI slot (not ideal).
+
+Purchased additional Noctua fans:
+* (2) Noctua NF-A12x25 PWM 120mm:
+    * (1) replaced the CPU cooler fan to exhaust through the rear. This fan is over the RAM.
+    * (1) replaced the 3-pin NZXT rear case fan
+* (2) Noctua NF-A14 PWM, 4-Pin Premium Quiet Cooling Fan (140mm, Brown)
+    * (2) positioned as front intake fans
+
 
 #### NZXT Fans
-H500 includes (2) 120mm fans. One is 4-pin and the other is 3-pin. The 4-pin fan runs at a high RPM when in PWM mode. Both NZXT fans run at a lower RPM when calibrated in DC mode from the ASUS BIOS.
+H500 includes (2) 120mm 3-pin fans. Not used in this build.
 
 #### H500 USB
 Front panel USB uses 3.0 Gen1 instead of 3.0 Gen2.
@@ -40,13 +48,16 @@ macOS Mojave version 10.14.2
 ## BIOS Settings
 * Load optimized defaults
 * Optimize fans
-* Manually configure fan curves
+* Set fan curve to standard
 * Enable Vt-d (for VMware Fusion)
 * Enable Intel (VMX) Virtualization Technology (for VMware Fusion)
 * XHCI Hand-off: Enabled
 * Advanced\System Agent (SA) Configuration\Graphics Configuration
     * Primary Display: PCIE
     * iGPU Multi-Monitor: Enabled (required for JPEG preview/quick look)
+
+### Asus AI Overclocking
+A cooler score of 192 was calculated with the configured fans. The system crashes in Windows under load at values of 180+. Manually configuring a cooler score of 175 (38% overclocked) appears to be stable.
 
 ## Working
 * Mojave install boots successfully
@@ -76,9 +87,6 @@ macOS Mojave version 10.14.2
     * [RehabMan's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/)
 * [Guide to Fresh Installing Mojave](https://hackintosher.com/guides/guide-to-fresh-installing-macos-mojave-on-a-hackintosh-10-14/)
 * [Mojave Update](https://hackintosher.com/guides/updating-your-hackintosh-to-mojave-10-14)
-
-## Additional Notes
-* Updating the Product Model/Name from 14,2 to 18,3 required Graphics > Inject ATI. Otherwise, it would boot but not display on local monitor (was able to remote in via Share Screen). Using Lilu.kext and WhateverGreen.kext is a replacement for injecting ATI in Clover.
 
 ## SSDT (USB)
 In this configuration, the 2 rear black USB ports, USB 3.0 Gen2 motherboard header, and one of the USB 2.0 headers are not enabled in order to stay within macOS's 15-port limit.
@@ -131,3 +139,7 @@ WhateverGreen.kext | Graphics
 * https://www.insanelymac.com/forum/topic/323469-change-cpu-name-in-about-this-mac/?do=findComment&comment=2488294
 
 Updated file [./AppleSystemInfo.strings](here)
+
+## Additional Notes
+* Updating the Product Model/Name from 14,2 to 18,3 required Graphics > Inject ATI. Otherwise, it would boot but not display on local monitor (was able to remote in via Share Screen). Using Lilu.kext and WhateverGreen.kext is a replacement for Inject ATI in Clover.
+* macOS will not sleep when LG display is set to Deep Sleep Mode
