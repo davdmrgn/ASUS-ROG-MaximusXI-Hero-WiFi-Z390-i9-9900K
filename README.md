@@ -15,25 +15,35 @@ Type|Item
 **Wi-Fi + Bluetooth Adapter PCI-E x1 Card** | [WiFi + Bluetooth 4.0 Card to PCI-E x1 Adapter Card PC/Hackintosh Without BCM943224PCIEBT2/bcm94360CS2/BCM943602CS (black)](https://www.amazon.com/gp/product/B076KBBFV4/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 **Wi-Fi Bluetooth Airport Wireless Card** | [Padarsey BCM94360CS2 WiFi Bluetooth Airport Wireless Card Compatible for MacBook Air 11" A1465 (2013, 2014, 2015) 13" A1466 (2013, 2014, 2015, 2017) (661-7465, 661-7481, 653-0023)](https://www.amazon.com/gp/product/B07C78VBCD/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 
-### Hardware Info
-#### CPU Cooler + RAM Height + Fan Location
+## Hardware Info
+### CPU Cooler + RAM Height + Fan Location
 The RAM height caused the NH-D15 fan to not fit in the case when exhausting air toward the rear of the case. NH-D15 installation is possible when venting through the top of the case (vertical) instead of the rear (horizontal). In this configuration, the video card may need to be positioned in the middle x16 PCI slot (not ideal).
 
-Purchased additional Noctua fans:
-* (2) Noctua NF-A12x25 PWM 120mm:
-    * (1) replaced the CPU cooler fan to exhaust through the rear. This fan is over the RAM.
-    * (1) replaced the 3-pin NZXT rear case fan
-* (2) Noctua NF-A14 PWM, 4-Pin Premium Quiet Cooling Fan (140mm, Brown)
-    * (2) positioned as front intake fans
+### Fan Situation
+Location|Fan|Size|RPM|dbA|m3/h
+:----|:----|:----|:----|:----|:----
+CPU Cooler (NH-D15) | NF-A15 PWM | 140mm | 300-1200 | 19.2 | 115.5
+CPU Cooler (NH-D15) | NF-A12x25 PWM | 120mm | 450-2000 | 22.6 | 102.1
+Rear (Exhaust) | NF-A12x25 PWM | 120mm | 450-2000 | 22.6 | 102.1
+Top Rear (Exhaust) | NF-A15 PWM | 140mm | 300-1200 | 19.2 | 115.5
+Front (Intake) | (2) NF-A14 PWM | 140mm | 300-1500 | 24.6 | 115.5
 
+### Asus Fan Curve Settings
+Fan|Low Temp|Mid Temp|High Temp|Ramp Up|Ramp Down|Source|Auto-Stop
+:----:----:----:----:----:----:----:----
+CPU (Cooler)|20% @ 40C|60% @ 60C|Not Used|0s|5s|CPU|
+H-AMP Fan (Top)|20% @ 40C|60% @ 60C|Not Used|12s|25s|CPU|Yes
+Cassis Fan 1 (Rear)|20% @ 40C|60% @ 60C|Not Used|12s|25s|CPU|
+Cassis Fan 2 (Front Top)|25% @ 40C|60% @ 60C|Not Used|12s|25s|CPU+Mobo|
+Cassis Fan 3 (Front Bottom)|25% @ 40C|60% @ 60C|Not Used|12s|25s|CPU|
 
-#### NZXT Fans
+### NZXT Fans
 H500 includes (2) 120mm 3-pin fans. Not used in this build.
 
-#### H500 USB
+### H500 USB
 Front panel USB uses 3.0 Gen1 instead of 3.0 Gen2.
 
-#### WiFi Adapter Card
+### WiFi Adapter Card
 PCI card has 3 antennas. The BT/WiFi card only has 2 antenna connections due to its small size (for laptops). Works fine, but a desktop-style card with 3 antenna connections (iMac) could have been used.
 
 ## macOS
@@ -67,7 +77,6 @@ A cooler score of 192 was calculated with the configured fans. The system crashe
 * USB 2.0
 * Sleep/Wake
 * Quicklook
-* SATA ports detected, not tested
 * S1220 Audio (ALC1220) https://hackintosher.com/guides/get-hackintosh-audio-working/
 * Youtube video
 * H.264 videos via VLC (.mkv, .m4a, .m4p)
@@ -78,11 +87,12 @@ A cooler score of 192 was calculated with the configured fans. The system crashe
 
 ## Not Working
 * Charging Macbook via USB-C (It's recognized, but get an error regarding Firewire not being supported on this Mac - 14,2 at the time of testing)
+* Front audio jacks
 
 ## Resources
 * [Clover](https://sourceforge.net/projects/cloverefiboot/)
 * [Clover Configurator](https://mackie100projects.altervista.org/download-clover-configurator/)
-* [This guide](https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/)  got the installer working straight away. I know the board doesn't match, but it worked.
+* [This guide](https://www.tonymacx86.com/threads/success-gigabyte-designare-z390-thunderbolt-3-i7-9700k-amd-rx-580.267551/) got the installer working straight away. I know the board doesn't match, but it worked.
 * [Hardware sensors and fan speed](https://hackintosher.com/guides/hwmonitor-hackintosh-guide/)
     * [RehabMan's FakeSMC](https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek/downloads/)
 * [Guide to Fresh Installing Mojave](https://hackintosher.com/guides/guide-to-fresh-installing-macos-mojave-on-a-hackintosh-10-14/)
