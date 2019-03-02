@@ -46,6 +46,8 @@ Front panel USB uses 3.0 Gen1 instead of 3.0 Gen2.
 ### WiFi Adapter Card
 PCI card has 3 antennas. The BT/WiFi card only has 2 antenna connections due to its small size (for laptops). Works fine, but a desktop-style card with 3 antenna connections (iMac) could have been used.
 
+According to [this reddit post](https://www.reddit.com/r/hackintosh/comments/an7u0a/inteli99900k32gb_ramvega_64_everything_works/), the [BCM94352Z NGFF 802.11ac Dual Band Wireless WIFI Card Module for Lenovo](https://pcpartpicker.com/product/wmw7YJ/richer-r-wifi-card-bcm94352z-ngff-80211ac-dual-band-wireless-wifi-card-module-for-lenovo-b50-70n50-70b40-80b50-80e40-30e40-70e40-80y40-70y40-80y50-70y50-80y50-70-touchy50-80-touchy-yo) could have worked in the Intel wifi card slot. If that's the case, an ITX board and case could have been used.
+
 ## macOS
 macOS Mojave version 10.14.2
 * Format USB (minimum 8 GB) `diskutil eraseDisk JHFS+ USB /dev/disk#`
@@ -65,9 +67,11 @@ macOS Mojave version 10.14.2
 * Advanced\System Agent (SA) Configuration\Graphics Configuration
     * Primary Display: PCIE
     * iGPU Multi-Monitor: Enabled (required for JPEG preview/quick look)
+* Advanced\APM Configuration
+    * ErP Ready: Enable (S4+S5) (to fix waking up after sleep - also keeps unmounted SATA drive asleep)
 
 ### Asus AI Overclocking
-A cooler score of 192 was calculated with the configured fans. The system crashes in Windows under load at values of 180+. Manually configuring a cooler score of 175 (38% overclocked) appears to be stable.
+A cooler score of 192 was calculated with the configured fans. The system crashes in Windows under load at values of 180+. Manually configuring a cooler score of 175 (38% overclocked) appears to be stable. Overclocking has been disabled to keep CPU temperatures low.
 
 ## Working
 * Mojave install boots successfully
@@ -86,7 +90,7 @@ A cooler score of 192 was calculated with the configured fans. The system crashe
 * USB-C connect to display - working as a USB hub for additional USB type A ports on display (not confirmed as a display+sound source)
 
 ## Not Working
-* Charging Macbook via USB-C (It's recognized, but get an error regarding Firewire not being supported on this Mac - 14,2 at the time of testing)
+* Charging Macbook via USB-C (It's recognized, but get an error regarding Firewire not being supported on this Mac - 14,2 at the time of testing); UPDATE: It does charge the Macbook, but still displays a warning message when connecting it.
 * Front audio jacks
 
 ## Resources
@@ -127,8 +131,8 @@ In this configuration, the 2 rear black USB ports, USB 3.0 Gen2 motherboard head
     * SS09: ENABLED
     * SS10: ENABLED
     * Other Super Speed (SS) USB ports are DISABLED 
-* Save as `SSDT-UIAC-ALL.aml` file to `EFI/CLOVER/ACPI/patched/`
-* Disable USB port limit patch
+* Compile as `SSDT-UIAC-ALL.aml` file to `EFI/CLOVER/ACPI/patched/`
+* Disable USB port limit patch in Clover
 
 ## Clover Files
 Kext | Usage
@@ -152,4 +156,3 @@ Updated file [./AppleSystemInfo.strings](here)
 
 ## Additional Notes
 * Updating the Product Model/Name from 14,2 to 18,3 required Graphics > Inject ATI. Otherwise, it would boot but not display on local monitor (was able to remote in via Share Screen). Using Lilu.kext and WhateverGreen.kext is a replacement for Inject ATI in Clover.
-* macOS will not sleep when LG display is set to Deep Sleep Mode
