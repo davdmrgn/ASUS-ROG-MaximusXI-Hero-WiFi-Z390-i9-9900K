@@ -1,33 +1,52 @@
 
-Clover EFI installer log - Sun Jan  6 10:21:21 EST 2019
-Installer version: v2.4k r4813 EFI bootloader
+Clover EFI installer log - Mon Sep  9 17:23:22 EDT 2019
+Installer version: v2.5k r5070 EFI bootloader
 ======================================================
-/dev/disk0 (internal):
+/dev/disk0 (internal, physical):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:      GUID_partition_scheme                         2.0 TB     disk0
+   0:      GUID_partition_scheme                        *8.0 TB     disk0
    1:                        EFI EFI                     209.7 MB   disk0s1
-   2:                 Apple_APFS Container disk1         2.0 TB     disk0s2
+   2:          Apple_CoreStorage Seag8                   8.0 TB     disk0s2
 
-/dev/disk1 (synthesized):
+/dev/disk1 (internal):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:      APFS Container Scheme -                      +2.0 TB     disk1
-                                 Physical Store disk0s2
-   1:                APFS Volume macOS                   12.4 GB    disk1s1
-   2:                APFS Volume Preboot                 44.7 MB    disk1s2
-   3:                APFS Volume Recovery                517.0 MB   disk1s3
-   4:                APFS Volume VM                      2.1 GB     disk1s4
+   0:      GUID_partition_scheme                         2.0 TB     disk1
+   1:                        EFI EFI                     209.7 MB   disk1s1
+   2:                 Apple_APFS Container disk4         2.0 TB     disk1s2
 
-/dev/disk2 (external, physical):
+/dev/disk2 (internal, physical):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:      GUID_partition_scheme                        *123.0 GB   disk2
-   1:                        EFI EFI                     209.7 MB   disk2s1
-   2:                  Apple_HFS Install macOS Mojave    122.7 GB   disk2s2
+   0:     FDisk_partition_scheme                        *512.1 GB   disk2
+   1:               Windows_NTFS System Reserved         575.7 MB   disk2s1
+   2:               Windows_NTFS                         511.5 GB   disk2s2
 
-Target volume /Volumes/macOS on disk1 is APFS on physical store disk0s2
+/dev/disk3 (internal, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *1.0 TB     disk3
+   1:                        EFI EFI                     209.7 MB   disk3s1
+   2:                  Apple_HFS Time Machine            999.9 GB   disk3s2
+
+/dev/disk4 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +2.0 TB     disk4
+                                 Physical Store disk1s2
+   1:                APFS Volume macOS                   760.2 GB   disk4s1
+   2:                APFS Volume Preboot                 47.1 MB    disk4s2
+   3:                APFS Volume Recovery                509.7 MB   disk4s3
+   4:                APFS Volume VM                      2.1 GB     disk4s4
+
+/dev/disk5 (internal, virtual):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:                  Apple_HFS Seag8                  +8.0 TB     disk5
+                                 Logical Volume on disk0s2
+                                 03DF569A-A65A-46E4-9AE7-4A1B51EC9A8E
+                                 Unlocked Encrypted
+
+Target volume /Volumes/macOS on disk4 is APFS on physical store disk1s2
 ======================================================
 Backing up EFI files
 
-Backing up /Volumes/macOS/EFIROOTDIR/EFI folder to /Volumes/macOS/EFI-Backups/r4813/2019-01-06-10h21/EFI
+Backing up /Volumes/macOS/EFIROOTDIR/EFI folder to /Volumes/macOS/EFI-Backups/r4934/2019-09-09-17h23/EFI
 ======================================================
 Installing BootSectors/BootLoader
 
