@@ -16,30 +16,6 @@ Type|Item
 **Wi-Fi Bluetooth Airport Wireless Card** | [Padarsey BCM94360CS2 WiFi Bluetooth Airport Wireless Card Compatible for MacBook Air 11" A1465 (2013, 2014, 2015) 13" A1466 (2013, 2014, 2015, 2017) (661-7465, 661-7481, 653-0023)](https://www.amazon.com/gp/product/B07C78VBCD/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 
 ## Hardware Info
-### CPU Cooler + RAM Height + Fan Location
-The RAM height caused the NH-D15 fan to not fit in the case when exhausting air toward the rear of the case. NH-D15 installation is possible when venting through the top of the case (vertical) instead of the rear (horizontal). In this configuration, the video card may need to be positioned in the middle x16 PCI slot (not ideal).
-
-### Fan Situation
-Location|Fan|Size|RPM|dbA|m3/h
-:----|:----|:----|:----|:----|:----
-CPU Cooler (NH-D15) | NF-A15 PWM | 140mm | 300-1200 | 19.2 | 115.5
-CPU Cooler (NH-D15) | NF-A12x25 PWM | 120mm | 450-2000 | 22.6 | 102.1
-Rear (Exhaust) | NF-A12x25 PWM | 120mm | 450-2000 | 22.6 | 102.1
-Top Rear (Exhaust) | NF-A15 PWM | 140mm | 300-1200 | 19.2 | 115.5
-Front (Intake) | (2) NF-A14 PWM | 140mm | 300-1500 | 24.6 | 115.5
-
-### Asus Fan Curve Settings
-Fan|Low Temp|Mid Temp|High Temp|Ramp Up|Ramp Down|Source|Auto-Stop
-:----|:----|:----|:----|:----|:----|:----|:----
-CPU (Cooler)|20% @ 40C|60% @ 60C|Not Used|0s|5s|CPU|
-H-AMP Fan (Top)|20% @ 40C|60% @ 60C|Not Used|12s|25s|CPU|Yes
-Cassis Fan 1 (Rear)|20% @ 40C|60% @ 60C|Not Used|12s|25s|CPU|
-Cassis Fan 2 (Front Top)|25% @ 40C|60% @ 60C|Not Used|12s|25s|CPU+Mobo|
-Cassis Fan 3 (Front Bottom)|25% @ 40C|60% @ 60C|Not Used|12s|25s|CPU|
-
-### NZXT Fans
-H500 includes (2) 120mm 3-pin fans. Not used in this build.
-
 ### H500 USB
 Front panel USB uses 3.0 Gen1 instead of 3.0 Gen2.
 
@@ -49,7 +25,10 @@ PCI card has 3 antennas. The BT/WiFi card only has 2 antenna connections due to 
 According to [this reddit post](https://www.reddit.com/r/hackintosh/comments/an7u0a/inteli99900k32gb_ramvega_64_everything_works/), the [BCM94352Z NGFF 802.11ac Dual Band Wireless WIFI Card Module for Lenovo](https://pcpartpicker.com/product/wmw7YJ/richer-r-wifi-card-bcm94352z-ngff-80211ac-dual-band-wireless-wifi-card-module-for-lenovo-b50-70n50-70b40-80b50-80e40-30e40-70e40-80y40-70y40-80y50-70y50-80y50-70-touchy50-80-touchy-yo) could have worked in the Intel wifi card slot. If that's the case, an ITX board and case could have been used.
 
 ## macOS
-macOS Mojave version 10.14.2
+macOS Catalina version 10.15.2
+
+> Information in this section needs to be updated for Catalina. Don't have time right now.
+
 * Format USB (minimum 8 GB) `diskutil eraseDisk JHFS+ USB /dev/disk#`
 > The above command was required for a USB drive which did not have an EFI partition, not created with the GUID partition scheme. The option to create the GUID partition scheme was not in the Mojave Disk Utility GUI.
 
