@@ -340,11 +340,11 @@
 		<key>BiosVersion</key>
 		<string>IM183.88Z.F000.B00.1809280842</string>
 		<key>Board-ID</key>
-		<string>Mac-BE088AF8C5EB4FA2</string>
+		<string></string>
 		<key>BoardManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>BoardSerialNumber</key>
-		<string>C02T55ZSJ1GJ0PGJC</string>
+		<string></string>
 		<key>BoardType</key>
 		<integer>10</integer>
 		<key>BoardVersion</key>
@@ -374,9 +374,9 @@
 		<key>ProductName</key>
 		<string>iMac18,3</string>
 		<key>SerialNumber</key>
-		<string>C02T55ZSJ1GJ</string>
+		<string></string>
 		<key>SmUUID</key>
-		<string>D70301D0-29B6-40C2-A0BC-1F489E27FDB8</string>
+		<string></string>
 		<key>Version</key>
 		<string>1.0</string>
 	</dict>
