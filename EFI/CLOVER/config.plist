@@ -500,7 +500,7 @@
 	<key>RtVariables</key>
 	<dict>
 		<key>#MLB</key>
-		<string></string>
+		<string>XXXXXXXXXXXXXXXX</string>
 		<key>#ROM</key>
 		<string>UseMacAddr0</string>
 		<key>BooterConfig</key>
@@ -532,11 +532,11 @@
 		<key>BiosVersion</key>
 		<string>IM183.88Z.F000.B00.1906171613</string>
 		<key>Board-ID</key>
-		<string></string>
+		<string>Mac-XXXXXXXXXXXXXXX</string>
 		<key>BoardManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>BoardSerialNumber</key>
-		<string></string>
+		<string>XXXXXXXXXXXXXXXX</string>
 		<key>BoardType</key>
 		<integer>10</integer>
 		<key>BoardVersion</key>
@@ -566,9 +566,9 @@
 		<key>ProductName</key>
 		<string>iMac18,3</string>
 		<key>SerialNumber</key>
-		<string></string>
+		<string>XXXXXXXXXXXX</string>
 		<key>SmUUID</key>
-		<string></string>
+		<string>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</string>
 		<key>Trust</key>
 		<true/>
 		<key>Version</key>
