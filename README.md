@@ -54,6 +54,7 @@ SSDT procedures are lengthy and a bit confusing. After doing it, here is my pers
 - If you want to do it manually, make an Ubuntu USB installer to generate your DSDT, otherwise, just use/edit the files already available as they appear to have the correct values required
 - Only .aml files should be put into the ACPI folder inside the OC\EFI
 - Determine which .aml files you'll need based on the primary guide
+- A previously configured `SSDT-UIAC.aml` was required to get Bluetooth to work
 
 ## BIOS Settings
 
@@ -75,7 +76,6 @@ A cooler score of 192 was calculated with the configured fans. The system crashe
 ## Not Working
 
 * Front audio jacks?
-* Bluetooth
 
 ## Additional Details
 
