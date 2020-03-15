@@ -66,8 +66,11 @@ SSDT procedures are lengthy and a bit confusing. After doing it, here is my pers
 * Enable Intel (VMX) Virtualization Technology (for VMware Fusion)
 * Enable Vt-d (for VMware Fusion)
 * XHCI Hand-off: Enabled
-* Advanced\APM Configuration
-  * ErP Ready: Enable (S4+S5) (to fix waking up after sleep - also keeps unmounted SATA drive asleep)
+* **ADDITIONAL CHANGES** - REQUIRES UPDATING
+
+## Post-Install
+
+* Set the Startup disk in macOS system preferences
 
 ### Asus AI Overclocking
 
@@ -76,6 +79,7 @@ A cooler score of 192 was calculated with the configured fans. The system crashe
 ## Not Working
 
 * Front audio jacks?
+* Time Machine disk shows up in boot menu
 
 ## Additional Details
 
