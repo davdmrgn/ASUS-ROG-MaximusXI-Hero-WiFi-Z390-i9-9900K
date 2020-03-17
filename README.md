@@ -79,8 +79,12 @@ A cooler score of 192 was calculated with the configured fans. The system crashe
 ## Not Working
 
 * Front audio jacks?
-* Time Machine disk shows up in boot menu
+* ~~Time Machine disk shows up in boot menu~~ (FIX: Removed the EFI partition from the Time Machine disk which previously had an OS on it.)
 
 ## Additional Details
 
 When I upgraded from Mojave to Catalina, it worked but there were changes in Clover which I couldn't confirm. Upgrading my BIOS from 0702 to 1401 caused a boot issue (`Super IODevice: [Fatal] found unsupported chip`). I gave up attempting to fix via Clover and tried OpenCore, which worked on a Catalina installer USB. I used that installer to rename the old EFI folder, then copy the EFI from the Catalina installer USB to my broken Catalina installation (this was done via diskutil in Terminal from the installer).
+
+### Updating OpenCore
+
+Applying updates via Clover was EASY. Doing this in OpenCore is going to be a bit more manual. They suggest keeping a USB of your macOS installer on it, and use that to test OpenCore EFI updates. It's a bit more work than Clover, but everything else seems to be going well.
