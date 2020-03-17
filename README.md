@@ -38,23 +38,23 @@ macOS Catalina version 10.15.3
 
 ## OpenCore
 
-- [Primary instructions](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/opencore-efi)
-- [EFI mount](https://github.com/corpnewt/MountEFI)
-- Mount installer USB EFI
-- Copy EFI from OpenCore-0.5.6-DEBUG into USB
-- Follow directions on what to remove and what to add
-- SSDT details are below
-- If changing from Clover to OpenCore, once you're done generating your config.plist, use the same serial number as you did before
-- Make sure the model is correct (for this processor, iMac18,3)
+* [Primary instructions](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/opencore-efi)
+* [EFI mount](https://github.com/corpnewt/MountEFI)
+* Mount installer USB EFI
+* Copy EFI from OpenCore-0.5.6-DEBUG into USB
+* Follow directions on what to remove and what to add
+* SSDT details are below
+* If changing from Clover to OpenCore, once you're done generating your config.plist, use the same serial number as you did before
+* Make sure the model is correct (for this processor, iMac18,3)
 
 ### SSDT
 
 SSDT procedures are lengthy and a bit confusing. After doing it, here is my personal summary:
 
-- If you want to do it manually, make an Ubuntu USB installer to generate your DSDT, otherwise, just use/edit the files already available as they appear to have the correct values required
-- Only .aml files should be put into the ACPI folder inside the OC\EFI
-- Determine which .aml files you'll need based on the primary guide
-- A previously configured `SSDT-UIAC.aml` was required to get Bluetooth to work
+* If you want to do it manually, make an Ubuntu USB installer to generate your DSDT, otherwise, just use/edit the files already available as they appear to have the correct values required
+* Only .aml files should be put into the ACPI folder inside the OC\EFI
+* Determine which .aml files you'll need based on the primary guide
+* A previously configured `SSDT-UIAC.aml` was required to get Bluetooth to work
 
 ## BIOS Settings
 
