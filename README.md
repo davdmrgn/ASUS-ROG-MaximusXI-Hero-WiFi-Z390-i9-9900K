@@ -59,27 +59,46 @@ SSDT procedures are lengthy and a bit confusing. After doing it, here is my pers
 ## BIOS Settings
 
 * [BIOS updated to 1401](https://www.asus.com/Motherboards/ROG-MAXIMUS-XI-HERO-WI-FI/HelpDesk_BIOS/)
-  > NOTE: This broke my Clover install while on 10.15.3. Reverting to an earlier BIOS (1105) did not work.
+  > NOTE: This update broke my original Clover install while on 10.15.3. Reverting to an earlier BIOS (1105) did not work. That's why I'm on OpenCore now.
+* Reset BIOS by using clear CMOS button on back
+* Advanced Mode (F7)
 * Load optimized defaults
-* Optimize fans
-* Set fan curve to standard
-* Enable Intel (VMX) Virtualization Technology (for VMware Fusion)
-* Enable Vt-d (for VMware Fusion)
-* XHCI Hand-off: Enabled
-* **ADDITIONAL CHANGES** - REQUIRES UPDATING
+* Extreme Tweaker\AI Overclock Tuner: Manual
+* Extreme Tweaker\CPU Core Ratio: AI Optimized
+* Extreme Tweaker\AI Features\Cooler Efficiency Customize: User Specify
+* Extreme Tweaker\AI Features\Cooler Score: 175
+* Platform Misc\PCI Express Native Power Management: Enable
+* Platform Misc\Native ASPM: Enable
+* CPU\Intel VMX: Enable
+* Advanced\System Agent\VT-d: Enable
+* Advanced\Onboard\Intel LAN Controller: Disable
+* Advanced\Onboard\LED in working state: All On
+* Advanced\Onboard\LED Q-Code: Auto
+* Advanced\Onboard\LED in sleep state: Stealth
+* Advanced\Onboard\Connectivity mode (Wi-Fi & Bluetooth): Disable
+* Advanced\APM\Restore AC Power Loss: Last State
+* Advanced\APM\Power on By PCI-E: Enable
+* Advanced\PCI\SR-IOV: Enable
+* Advanced\USB\XHCI Hand-off: Enable
+* Boot\Fast Boot: Disable
+* Boot\Wait For F1: Disable
+* Boot\Setup Mode: EZ Mode
+* Boot\Secure Boot\OS Type: Other OS
+* Q-Fan\Set all fans to PWM
+* Q-Fan\Optimize All
+* Q-Fan\Verify all fans are set to PWM after optimizing
+* Q-Fan\Disable unused fans
+
+### ASUS AI Overclocking
+
+AI cooler score of 192 was calculated with the configured fans. The system crashes under load at values of 180+. Manually configuring a cooler score of 175 (38% overclocked) appears to be stable.
 
 ## Post-Install
 
 * Set the Startup disk in macOS system preferences
-
-### Asus AI Overclocking
-
-A cooler score of 192 was calculated with the configured fans. The system crashes in Windows under load at values of 180+. Manually configuring a cooler score of 175 (38% overclocked) appears to be stable. Overclocking has been disabled to keep CPU temperatures low.
+* Copy USB installer OpenCore EFI to boot disk EFI
 
 ## Not Working
-
-* Front audio jacks?
-* ~~Time Machine disk shows up in boot menu~~ (FIX: Removed the EFI partition from the Time Machine disk which previously had an OS on it.)
 
 ## Additional Details
 
@@ -88,3 +107,56 @@ When I upgraded from Mojave to Catalina, it worked but there were changes in Clo
 ### Updating OpenCore
 
 Applying updates via Clover was EASY. Doing this in OpenCore is going to be a bit more manual. They suggest keeping a USB of your macOS installer on it, and use that to test OpenCore EFI updates. It's a bit more work than Clover, but everything else seems to be going well.
+
+### Dual Booting Linux (Fix Grub after macOS install)
+
+Linux was installed prior to macOS. Grub was installed to the EFI partition of the Linux disk. OpenCore was installed to the EFI partition of the macOS disk (both OSs were kept separate). After installing macOS, the disk numbering changed which caused the Linux OS to not show up in the ASUS boot menu. This must be repaired using a Linux Live CD.
+
+> NOTE: You cannot boot Linux from OpenCore. Grub reads my Linux disk as `/dev/sdb` or `/dev/hd1` while while OpenCore reads it as `/dev/hd6`. Since the disk numbering between Grub and OpenCore are different, you must boot Linux from the ASUS boot menu.
+
+* Boot to Linux Live CD
+* Press CTRL+ALT+T to open a Terminal
+* Execute the following commands to
+  1. Mount the Linux installation
+  2. Bind the supporting mounts from the Live CD into the Linux installation mount
+  3. Change root into the Linux installation
+  4. Install Grub EFI (this may not be needed as Grub already exists)
+  5. Update Grub HD references in the grub.cfg file
+  6. Reboot into ASUS boot menu
+  7. Boot into Linux (successfully)
+
+```bash
+sudo mkdir /mnt
+sudo mount /dev/sdb2 /mnt
+sudo mount /dev/sdb1 /mnt/efi
+sudo mount --bind /dev /mnt/dev
+sudo mount --bind /proc /mnt/proc
+sudo mount --bind /sys /mnt/sys
+sudo chroot /mnt
+grub-install --target=x86_64-efi /dev/sdb # may not be needed
+grub-install --recheck # may not be needed
+update-grub
+```
+
+> NOTE: After doing this, I am not able to get into the ASUS BIOS setup - it goes to a black screen. Must completely reset the CMOS using the button on the rear of the motherboard in order to access the BIOS, then restore a saved setting.
+
+> NOTE #2: Prior to resetting the BIOS, there were 2 entries for Linux. After resetting, there is only 1 entry for Linux, which is correct.$$
+
+#### Bluetooth Keyboard and Mouse
+
+1. Pair devices in Linux
+2. Pair devices in macOS
+3. Log back into iCloud (pairing devices in another OS breaks iCloud integration)
+4. Copy macOS bluetooth device keys `sudo defaults read com.apple.bluetooth.plist LinkKeys` (data after `bytes = 0x`)
+5. User PowerShell to convert to uppercase letters
+6. Boot into Linux
+7. Switch to root `sudo bash`
+8. Turn off bluetooth devices
+9. Turn off bluetooth in Linux `sudo service bluetooth stop`
+10. Edit bluetooth config file `nano /var/lib/bluetooth/D0:81:7A:C7:E7:2F/10:94:BB:9F:4A:90/info`
+11. Update Key to the new key from macOS recorded earlier
+12. Start bluetooth `sudo service bluetooth start`
+13. Monitor bluetooth service `bluetoothctl`
+14. Turn on bluetooth device (mouse)
+15. Watch it connect and disconnect repeatedly
+
