@@ -597,7 +597,7 @@
 		<key>Boot</key>
 		<dict>
 			<key>HibernateMode</key>
-			<string>None</string>
+			<string>3</string>
 			<key>HideAuxiliary</key>
 			<false/>
 			<key>HideSelf</key>
