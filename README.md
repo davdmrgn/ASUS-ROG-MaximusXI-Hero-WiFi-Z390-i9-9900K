@@ -147,7 +147,7 @@ update-grub
 1. Pair devices in Linux
 2. Pair devices in macOS
 3. Log back into iCloud (pairing devices in another OS breaks iCloud integration)
-4. Copy macOS bluetooth device keys `sudo defaults read com.apple.bluetooth.plist LinkKeys` (data after `bytes = 0x`)
+4. Copy macOS bluetooth device keys `sudo defaults read com.apple.bluetoothd.plist LinkKeys` (data after `bytes = 0x`)
 5. User PowerShell to convert to uppercase letters
 6. Boot into Linux
 7. Switch to root `sudo bash`
@@ -159,4 +159,3 @@ update-grub
 13. Monitor bluetooth service `bluetoothctl`
 14. Turn on bluetooth device (mouse)
 15. Watch it connect and disconnect repeatedly
-
