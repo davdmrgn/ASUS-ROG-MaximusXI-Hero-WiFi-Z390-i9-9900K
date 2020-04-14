@@ -159,3 +159,19 @@ update-grub
 13. Monitor bluetooth service `bluetoothctl`
 14. Turn on bluetooth device (mouse)
 15. Watch it connect and disconnect repeatedly
+
+#### Connecting Linux Installation Raw Disk to VMware Linux VM
+
+In troubleshooting the bluetooth mouse+keyboard in dual booting, I wanted to find a way to edit the files in the Linux OS disk from macOS without installing additional software. Since I'm using VMware Fusion, I wanted to test using an RDM with Fusion. This worked well.
+
+- Shut down Linux VM
+- Execute `diskutil list` to determine which disk has the Linux OS (`disk1s1` in this example)
+- Create .vmdk reference in virtual machine directory: `/Applications/VMware Fusion.app/Contents/Library/vmware-rawdiskCreator create /dev/disk1 2 <Virtual_Machine_Path>/<Virtual_Disk_Filename_without_Extension> ide`
+- Edit the .vmx file and add the following lines ([VMware KB](https://kb.vmware.com/s/article/2097401)):
+```
+ide0:0.present = "TRUE"
+ide0:0.fileName = "<Virtual_Disk_Filename>.vmdk"
+ide0:0.deviceType = "rawDisk"
+suspend.disabled = "TRUE"
+```
+- Power on the VM
