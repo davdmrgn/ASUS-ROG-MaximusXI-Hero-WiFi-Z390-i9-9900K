@@ -19,35 +19,73 @@ This is a log to keep track of my hackintosh config as it is built.
 
 ## Hardware Info
 
-### H500 USB
-
-Front panel USB uses 3.0 Gen1 instead of 3.0 Gen2.
+- Coffee Lake i9 9900K
+- Asus Maximus XI
+- Realtek ALC S1220A
 
 ### WiFi Adapter Card
 
 PCI card has 3 antennas. The BT/WiFi card only has 2 antenna connections due to its small size (for laptops). Works fine, but a desktop-style card with 3 antenna connections (iMac) could have been used.
 
-According to [this reddit post](https://www.reddit.com/r/hackintosh/comments/an7u0a/inteli99900k32gb_ramvega_64_everything_works/), the [BCM94352Z NGFF 802.11ac Dual Band Wireless WIFI Card Module for Lenovo](https://pcpartpicker.com/product/wmw7YJ/richer-r-wifi-card-bcm94352z-ngff-80211ac-dual-band-wireless-wifi-card-module-for-lenovo-b50-70n50-70b40-80b50-80e40-30e40-70e40-80y40-70y40-80y50-70y50-80y50-70-touchy50-80-touchy-yo) could have worked in the Intel wifi card slot. If that's the case, an ITX board and case could have been used.
+According to [this reddit post](https://www.reddit.com/r/hackintosh/comments/an7u0a/inteli99900k32gb_ramvega_64_everything_works/), the [BCM94352Z NGFF 802.11ac Dual Band Wireless WIFI Card Module for Lenovo](https://pcpartpicker.com/product/wmw7YJ/richer-r-wifi-card-bcm94352z-ngff-80211ac-dual-band-wireless-wifi-card-module-for-lenovo-b50-70n50-70b40-80b50-80e40-30e40-70e40-80y40-70y40-80y50-70y50-80y50-70-touchy50-80-touchy-yo) could have worked in the Intel wifi card slot.
 
 ## macOS
 
-macOS Catalina version 10.15.3
-
-* Format USB (minimum 8 GB) `diskutil eraseDisk JHFS+ USB /dev/disk#`
-* Create a macOS USB installer `sudo /Applications/Install\ macOS\ Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/USB`
+Monterey 12.0.1
 
 ## OpenCore
 
-* [Primary instructions](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/opencore-efi)
-* [EFI mount](https://github.com/corpnewt/MountEFI)
-* Mount installer USB EFI
-* Copy EFI from OpenCore-0.5.6-DEBUG into USB
-* Follow directions on what to remove and what to add
-* SSDT details are below
-* If changing from Clover to OpenCore, once you're done generating your config.plist, use the same serial number as you did before
-* Make sure the model is correct (for this processor, iMac18,3)
+Version: 0.7.4
+
+- Guide: https://dortania.github.io/OpenCore-Install-Guide/
+- Get your installation media
+  ```
+  cd /Applications/Install\ macOS\ Monterey.app/Contents/Resources
+  sudo ./createinstallmedia --volume /Volumes/USB --nointeraction --downloadassets
+  ```
+- MountEFI: https://github.com/corpnewt/MountEFI
+- Setup the OC folder required files:
+  - Drivers: 
+    - `HfsPlus.efi` for viewing HFS volumes (macOS installers) https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi
+    - `OpenCanopy.efi` for graphical boot images
+    - `OpenRuntime.efi` to get info for Linux dual boot
+  - Kexts:
+    - AppleALC (audio) https://github.com/acidanthera/AppleALC/releases
+    - Lilu (patches other things) https://github.com/acidanthera/Lilu/releases
+    - NVMeFix (storage) https://github.com/acidanthera/NVMeFix/releases
+    - VirtualSMC (hardware monitoring) https://github.com/acidanthera/VirtualSMC/releases
+      - SMCProcessor
+      - SMCSuperIO
+    - WhateverGreen (graphics) https://github.com/acidanthera/WhateverGreen/releases
+    - USBMap https://github.com/corpnewt/USBMap
+- ProperTree https://github.com/corpnewt/ProperTree
+- OpenCore Configurator (when you need a GUI)
+
+### ProperTree
+
+- Open `config.plist` in Propertree
+- Clean Snapshot (Cmd+Shift+R), select `OC` folder
+- Remove `#WARNING` entries
+- Coffee Lake specific edits: https://dortania.github.io/OpenCore-Install-Guide/config.plist/coffee-lake.html#starting-point
+
+### USBMap
+
+Rebuilt USBMap.kext during post-install with the following config:
+
+USB Location | Port Name | Type
+--- | --- | ---
+Case top left (USB header) | HS04/SS08 | 3
+Case top right (USB header) | HS03/SS07 | 3
+Rear left top | HS05 | 0
+Rear left bottom | HS06 | 0
+Rear mid top | SS03 | 3
+Rear mid bottom | SS04 | 9
+Rear right top to bottom | SS05/HS01, SS06/HS02, SS01, SS02 | 3
+Internal Broadcom card | HS07 | 2
 
 ### SSDT
+
+> NOTE: This section is out of date.
 
 SSDT procedures are lengthy and a bit confusing. After doing it, here is my personal summary:
 
@@ -58,8 +96,9 @@ SSDT procedures are lengthy and a bit confusing. After doing it, here is my pers
 
 ## BIOS Settings
 
-* [BIOS updated to 1401](https://www.asus.com/Motherboards/ROG-MAXIMUS-XI-HERO-WI-FI/HelpDesk_BIOS/)
-  > NOTE: This update broke my original Clover install while on 10.15.3. Reverting to an earlier BIOS (1105) did not work. That's why I'm on OpenCore now.
+> NOTE: This section is out of date.
+
+* [BIOS updated to 1401](https://rog.asus.com/us/motherboards/rog-maximus/rog-maximus-xi-hero-wi-fi-model/helpdesk_bios)
 * Reset BIOS by using clear CMOS button on back
 * Advanced Mode (F7)
 * Load optimized defaults
@@ -93,85 +132,45 @@ SSDT procedures are lengthy and a bit confusing. After doing it, here is my pers
 
 AI cooler score of 192 was calculated with the configured fans. The system crashes under load at values of 180+. Manually configuring a cooler score of 175 (38% overclocked) appears to be stable.
 
-## Post-Install
+## Linux Dual Boot
 
-* Set the Startup disk in macOS system preferences
-* Copy USB installer OpenCore EFI to boot disk EFI
+Dual booting Linux on a separate disk. This was tested using Zorin OS, which has an Ubuntu base which uses GRUB.
 
-## Not Working
+> For the purposes of this documentation, the macOS OpenCore disk will be `/dev/sda`, and the Linux disk will be `/dev/sdb`.
 
-## Additional Details
+- Install macOS and OpenCore to `sda1`
+- Before installing Linux, copy/duplicate `/EFI/BOOT/BOOTx64.efi` because Linux will overwrite it with GRUB
+- Install Linux to `sda2`, selecting the option of installing the bootloader to `sda2` (even though it won't)
+- Boot into Linux, checking if the EFI in `/boot/efi` is mounted to `/dev/sda2` using `lsblk`; if not, edit `/etc/fstab` so Linux mounts the appropriate drive for the Linux EFI in the future
+- Boot into macOS using the macOS USB installer
+- We need to put all the bootloader files in the right location(s)
+  > Remember, Linux overwrote the `BOOTx64.efi` file on `sda1`. So, let's make sure we move that to `sda2` in the appropriate folder(s) and put back the OpenCore `BOOTx64.efi` file so OpenCore/macOS boots.
+- Put the Linux GRUB `BOOTx64.efi` file back in `sdb1 /EFI/BOOT` and rename it to `BOOTx64.efi.disabled` to prevent volume `NO NAME` from showing up in OpenCore during boot
+- Put the OpenCore `BOOTx64.efi` file back in `sda1 /EFI/BOOT`
+- Get the Linux boot disk `PciRoot` information
+  - Enable `OpenShell.efi` in OpenCore
+  - Boot into OpenShell, find the Linux EFI by checking for the `EFI/ubuntu` folder
+    > Hint: Type `FS#:` to change to that disk, `cd` to change directory, and `dir` to view the files
+  - Once in the Linux `FS#:` directory, type `map > map-table.txt`, then `exit` and boot back into macOS
+> When booting into macOS after being in OpenShell, it sometimes hangs. Hard reset and it should boot into macOS. Once into macOS, clear kext cache by typing `sudo kextcache -i /`. This cleared up any boot delays/issues after being in OpenShell.
+- Use OpenCore Configurator to add a boot entry in Misc for the Linux EFI
+  - Misc > Boot > Entries > Add
+    - Path: Paste in the `PciRoot` string from the `map-table.txt` file of the disk containing the Linux bootloader
+    - Add to the end of the path `/\EFI\ubuntu\grubx64.efi`
+      > This points to `/dev/sdb1/EFI/ubuntu/grubx64.efi`.
+    - Name: `Linux`
+    - Enabled: Yes
+  - Save the config.plist file
 
-When I upgraded from Mojave to Catalina, it worked but there were changes in Clover which I couldn't confirm. Upgrading my BIOS from 0702 to 1401 caused a boot issue (`Super IODevice: [Fatal] found unsupported chip`). I gave up attempting to fix via Clover and tried OpenCore, which worked on a Catalina installer USB. I used that installer to rename the old EFI folder, then copy the EFI from the Catalina installer USB to my broken Catalina installation (this was done via diskutil in Terminal from the installer).
+From here, you should be able to boot to Linux from OpenCore, having only 1 boot entry for Linux.
 
-### Updating OpenCore
+## Issues (and fixes)
 
-Applying updates via Clover was EASY. Doing this in OpenCore is going to be a bit more manual. They suggest keeping a USB of your macOS installer on it, and use that to test OpenCore EFI updates. It's a bit more work than Clover, but everything else seems to be going well.
-
-### Dual Booting Linux (Fix Grub after macOS install)
-
-Linux was installed prior to macOS. Grub was installed to the EFI partition of the Linux disk. OpenCore was installed to the EFI partition of the macOS disk (both OSs were kept separate). After installing macOS, the disk numbering changed which caused the Linux OS to not show up in the ASUS boot menu. This must be repaired using a Linux Live CD.
-
-> NOTE: You cannot boot Linux from OpenCore. Grub reads my Linux disk as `/dev/sdb` or `/dev/hd1` while while OpenCore reads it as `/dev/hd6`. Since the disk numbering between Grub and OpenCore are different, you must boot Linux from the ASUS boot menu.
-
-* Boot to Linux Live CD
-* Press CTRL+ALT+T to open a Terminal
-* Execute the following commands to
-  1. Mount the Linux installation
-  2. Bind the supporting mounts from the Live CD into the Linux installation mount
-  3. Change root into the Linux installation
-  4. Install Grub EFI (this may not be needed as Grub already exists)
-  5. Update Grub HD references in the grub.cfg file
-  6. Reboot into ASUS boot menu
-  7. Boot into Linux (successfully)
-
-```bash
-sudo mkdir /mnt
-sudo mount /dev/sdb2 /mnt
-sudo mount /dev/sdb1 /mnt/efi
-sudo mount --bind /dev /mnt/dev
-sudo mount --bind /proc /mnt/proc
-sudo mount --bind /sys /mnt/sys
-sudo chroot /mnt
-grub-install --target=x86_64-efi /dev/sdb # may not be needed
-grub-install --recheck # may not be needed
-update-grub
-```
-
-> NOTE: After doing this, I am not able to get into the ASUS BIOS setup - it goes to a black screen. Must completely reset the CMOS using the button on the rear of the motherboard in order to access the BIOS, then restore a saved setting.
-
-> NOTE #2: Prior to resetting the BIOS, there were 2 entries for Linux. After resetting, there is only 1 entry for Linux, which is correct.$$
-
-#### Bluetooth Keyboard and Mouse
-
-1. Pair devices in Linux
-2. Pair devices in macOS
-3. Log back into iCloud (pairing devices in another OS breaks iCloud integration)
-4. Copy macOS bluetooth device keys `sudo defaults read com.apple.bluetoothd.plist LinkKeys` (data after `bytes = 0x`)
-5. User PowerShell to convert to uppercase letters
-6. Boot into Linux
-7. Switch to root `sudo bash`
-8. Turn off bluetooth devices
-9. Turn off bluetooth in Linux `sudo service bluetooth stop`
-10. Edit bluetooth config file `nano /var/lib/bluetooth/D0:81:7A:C7:E7:2F/10:94:BB:9F:4A:90/info`
-11. Update Key to the new key from macOS recorded earlier
-12. Start bluetooth `sudo service bluetooth start`
-13. Monitor bluetooth service `bluetoothctl`
-14. Turn on bluetooth device (mouse)
-15. Watch it connect and disconnect repeatedly
-
-#### Connecting Linux Installation Raw Disk to VMware Linux VM
-
-In troubleshooting the bluetooth mouse+keyboard in dual booting, I wanted to find a way to edit the files in the Linux OS disk from macOS without installing additional software. Since I'm using VMware Fusion, I wanted to test using an RDM with Fusion. This worked well.
-
-- Shut down Linux VM
-- Execute `diskutil list` to determine which disk has the Linux OS (`disk1s1` in this example)
-- Create .vmdk reference in virtual machine directory: `/Applications/VMware Fusion.app/Contents/Library/vmware-rawdiskCreator create /dev/disk1 2 <Virtual_Machine_Path>/<Virtual_Disk_Filename_without_Extension> ide`
-- Edit the .vmx file and add the following lines ([VMware KB](https://kb.vmware.com/s/article/2097401)):
-```
-ide0:0.present = "TRUE"
-ide0:0.fileName = "<Virtual_Disk_Filename>.vmdk"
-ide0:0.deviceType = "rawDisk"
-suspend.disabled = "TRUE"
-```
-- Power on the VM
+- USB HS04@14400000 error at boot
+  - Fix: Re-do USBMap.kext
+- NVMe kext cache error at boot 
+  - Fix: Run `sudo kextcache -i /` in macOS
+- ProperTree has black window in Monterey
+  - Fix: Install Python, NOT the Universal installer. We need the Intel installer. Forgot where I got it. Generate the ProperTree app and use that. 
+- When installing Linux, you tell it to install the bootloader to `/dev/sdb` and it installs to `/dev/sda`. If you happen to have a `/dev/sdc1` it will mount that to `/boot/efi` instead of `/dev/sdb1`.
+  - Fix: It's a hot mess. On the first Linux boot, I would check everything before leaving. Make sure the proper devices are mounted and mapped. Use `lsblk` and make sure `fstab` is up to date with the proper volumes IDs. Don't trust it.
